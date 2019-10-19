@@ -38,7 +38,9 @@ class CategoryItem extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(15),
         ),
+  
       ),
+      
     );
   }
 }
