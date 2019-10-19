@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meals/models/meal.dart';
+import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -9,6 +11,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.duration,
@@ -18,42 +21,47 @@ class MealItem extends StatelessWidget {
 
   String get complexityText {
     switch (complexity) {
-      case Complexity.Simple :
-          return 'Simple';        
+      case Complexity.Simple:
+        return 'Simple';
         break;
-      case Complexity.Challenging :
-          return 'Challenging';        
+      case Complexity.Challenging:
+        return 'Challenging';
         break;
-      case Complexity.Hard :
-          return 'Hard';        
+      case Complexity.Hard:
+        return 'Hard';
         break;
-      default: 
-      return 'Unknown';
+      default:
+        return 'Unknown';
     }
   }
 
   String get affordabilityText {
     switch (affordability) {
-      case Affordability.Affordable :
-          return 'Affordable';        
+      case Affordability.Affordable:
+        return 'Affordable';
         break;
-      case Affordability.Pricey :
-          return 'Pricey';        
+      case Affordability.Pricey:
+        return 'Pricey';
         break;
-      case Affordability.Luxurious :
-          return 'Luxurious';        
+      case Affordability.Luxurious:
+        return 'Luxurious';
         break;
-      default: 
-      return 'Unknown';
+      default:
+        return 'Unknown';
     }
   }
 
-  void selectMeal() {}
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
